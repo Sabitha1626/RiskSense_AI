@@ -1,0 +1,84 @@
+.alert-panel-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.alert-filter-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.alert-panel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.alert-panel-item {
+    padding: 20px 24px;
+    position: relative;
+    cursor: pointer;
+}
+
+.alert-panel-item.unread {
+    border-left: 3px solid var(--color-primary);
+    background: rgba(99, 102, 241, 0.03);
+}
+
+.alert-panel-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.alert-panel-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert-type-icon {
+    font-size: 1rem;
+}
+
+.alert-type-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.alert-panel-time {
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+}
+
+.alert-panel-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--color-text);
+}
+
+.alert-panel-message {
+    font-size: 0.87rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+}
+
+.unread-dot {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    animation: pulse 2s infinite;
+}

@@ -1,0 +1,93 @@
+/* Employee Dashboard Styles */
+.employee-dashboard {
+    padding: 0;
+}
+
+/* Reliability Score Circle */
+.reliability-section {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 24px;
+    align-items: center;
+}
+
+.reliability-circle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.reliability-circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.circle-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-bg {
+    fill: none;
+    stroke: var(--bg-tertiary);
+    stroke-width: 8;
+}
+
+.circle-fill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 326.7;
+    transition: stroke-dashoffset 1s ease;
+}
+
+.circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.circle-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+}
+
+.circle-max {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.reliability-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.reliability-chart {
+    padding: 20px;
+}
+
+.reliability-chart h4 {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reliability-section {
+        grid-template-columns: 1fr;
+    }
+
+    .reliability-circle-wrap {
+        margin-bottom: 16px;
+    }
+}
