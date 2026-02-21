@@ -6,7 +6,7 @@ import useProjects from '../hooks/useProjects';
 import Loader from '../components/common/Loader';
 
 const ProjectsPage = () => {
-    const { projects, loading } = useProjects();
+    const { projects, loading, error } = useProjects();
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     return (
@@ -22,6 +22,15 @@ const ProjectsPage = () => {
 
                     {loading ? (
                         <Loader text="Loading projects..." />
+                    ) : error ? (
+                        <div className="error-state">
+                            <p>⚠️ Failed to load projects. Please try again.</p>
+                        </div>
+                    ) : projects.length === 0 ? (
+                        <div className="empty-state">
+                            <div className="empty-icon">📁</div>
+                            <p>No projects found.<br />Your manager will add projects and assign you to them.</p>
+                        </div>
                     ) : (
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '20px' }}>
                             {projects.map((project) => (

@@ -97,7 +97,10 @@ const EmployeePerformance = () => {
     };
 
     const avgAccuracy = perfData?.completedTasks?.length > 0
-        ? Math.round(perfData.completedTasks.reduce((s, t) => s + t.accuracy, 0) / perfData.completedTasks.length)
+        ? Math.round(
+            perfData.completedTasks.reduce((s, t) => s + (t.accuracy ?? t.completion_percent ?? 0), 0)
+            / perfData.completedTasks.length
+        )
         : 0;
 
     return (
@@ -175,18 +178,18 @@ const EmployeePerformance = () => {
                                                         <tbody>
                                                             {perfData.completedTasks.map((task, i) => (
                                                                 <tr key={i}>
-                                                                    <td className="td-name">{task.task}</td>
-                                                                    <td>{task.project}</td>
-                                                                    <td>{task.estimatedHours}h</td>
-                                                                    <td>{task.actualHours}h</td>
-                                                                    <td>{new Date(task.deadline).toLocaleDateString()}</td>
-                                                                    <td>{new Date(task.completionDate).toLocaleDateString()}</td>
+                                                                    <td className="td-name">{task.title || task.task || '—'}</td>
+                                                                    <td>{task.projectName || task.project || '—'}</td>
+                                                                    <td>{task.estimated_hours ?? task.estimatedHours ?? '—'}h</td>
+                                                                    <td>{task.actual_hours ?? task.actualHours ?? '—'}h</td>
+                                                                    <td>{task.deadline ? new Date(task.deadline).toLocaleDateString() : '—'}</td>
+                                                                    <td>{task.completion_date || task.completionDate ? new Date(task.completion_date || task.completionDate).toLocaleDateString() : '—'}</td>
                                                                     <td>
-                                                                        <span className={`badge badge-${task.onTime ? 'success' : 'danger'}`}>
-                                                                            {task.onTime ? 'Yes' : 'No'}
+                                                                        <span className={`badge badge-${task.on_time ?? task.onTime ? 'success' : 'danger'}`}>
+                                                                            {(task.on_time ?? task.onTime) ? 'Yes' : 'No'}
                                                                         </span>
                                                                     </td>
-                                                                    <td>{task.accuracy}%</td>
+                                                                    <td>{task.accuracy ?? task.completion_percent ?? 0}%</td>
                                                                 </tr>
                                                             ))}
                                                         </tbody>

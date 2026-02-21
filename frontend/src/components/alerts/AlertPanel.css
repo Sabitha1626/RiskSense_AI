@@ -26,7 +26,7 @@
 
 .alert-panel-item.unread {
     border-left: 3px solid var(--color-primary);
-    background: rgba(99, 102, 241, 0.03);
+    background: rgba(var(--color-primary-rgb), 0.03);
 }
 
 .alert-panel-item-top {

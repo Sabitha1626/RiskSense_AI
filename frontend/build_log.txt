@@ -1,0 +1,52 @@
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 441 modules transformed.
+
+---STDERR---
+[31m✗[39m Build failed in 1.42s
+[31merror during build:
+[31msrc/pages/SettingsPage.jsx (5:9): "ThemeContext" is not exported by "src/context/ThemeContext.jsx", imported by "src/pages/SettingsPage.jsx".[31m
+file: [36mC:/Users/lenovo/OneDrive/Desktop/Risk Pridictions/frontend/src/pages/SettingsPage.jsx:5:9[31m
+[33m
+3: import Sidebar from '../components/common/Sidebar';
+4: import { AuthContext } from '../context/AuthContext';
+5: import { ThemeContext } from '../context/ThemeContext';
+            ^
+6: import { HiOutlineCog, HiOutlineUser, HiOutlineBell, HiOutlineShieldCheck, HiOutlineLink, HiOutlineMoon, HiOutlineSun...
+7: import './SettingsPage.css';
+[31m
+    at getRollupError (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at ReturnValueScope.findVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionBodyScope.findVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at Identifier.bind (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5447:40)
+    at CallExpression.bind (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:2825:28)
+    at CallExpression.bind (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:12179:15)[39m
+
+---MSG---
+Command failed: npx vite build
+[31m✗[39m Build failed in 1.42s
+[31merror during build:
+[31msrc/pages/SettingsPage.jsx (5:9): "ThemeContext" is not exported by "src/context/ThemeContext.jsx", imported by "src/pages/SettingsPage.jsx".[31m
+file: [36mC:/Users/lenovo/OneDrive/Desktop/Risk Pridictions/frontend/src/pages/SettingsPage.jsx:5:9[31m
+[33m
+3: import Sidebar from '../components/common/Sidebar';
+4: import { AuthContext } from '../context/AuthContext';
+5: import { ThemeContext } from '../context/ThemeContext';
+            ^
+6: import { HiOutlineCog, HiOutlineUser, HiOutlineBell, HiOutlineShieldCheck, HiOutlineLink, HiOutlineMoon, HiOutlineSun...
+7: import './SettingsPage.css';
+[31m
+    at getRollupError (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at ReturnValueScope.findVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionBodyScope.findVariable (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at Identifier.bind (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5447:40)
+    at CallExpression.bind (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:2825:28)
+    at CallExpression.bind (file:///C:/Users/lenovo/OneDrive/Desktop/Risk%20Pridictions/frontend/node_modules/rollup/dist/es/shared/node-entry.js:12179:15)[39m

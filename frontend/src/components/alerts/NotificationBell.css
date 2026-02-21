@@ -92,7 +92,7 @@
 }
 
 .bell-item.unread {
-    background: rgba(99, 102, 241, 0.04);
+    background: rgba(var(--color-primary-rgb), 0.04);
     border-left: 3px solid var(--color-primary);
 }
 

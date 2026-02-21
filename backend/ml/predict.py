@@ -114,7 +114,7 @@ def _estimate_completion_date(current_progress: float, avg_daily: float, days_re
     else:
         days_needed = int(remaining_pct / avg_daily)
     from datetime import timedelta
-    est = date.today() + __import__('datetime').timedelta(days=max(days_needed, 0))
+    est = date.today() + timedelta(days=max(days_needed, 0))
     return est.isoformat()
 
 

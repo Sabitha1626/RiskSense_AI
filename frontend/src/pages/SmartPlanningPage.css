@@ -1,0 +1,64 @@
+.planning-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.sim-slider {
+    margin-bottom: 20px;
+}
+
+.sim-slider label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--color-text-secondary);
+}
+
+.sim-slider input[type="range"] {
+    width: 100%;
+    appearance: none;
+    height: 6px;
+    background: var(--color-surface);
+    border-radius: var(--radius-full);
+    outline: none;
+}
+
+.sim-slider input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+
+.sim-result {
+    padding: 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    margin-top: 16px;
+    text-align: center;
+}
+
+.resource-card {
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    transition: all var(--transition-fast);
+}
+
+.resource-card:hover {
+    border-color: var(--border-color-light);
+    transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+    .planning-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -72,7 +72,7 @@ const EmployeeDashboard = () => {
                 status: taskStatus,
             });
             setSubmitMsg(result.message);
-            setTodayReports(prev => ({ ...prev, [selectedTask]: { hoursWorked, completionPercent, issuesFaced, status: taskStatus } }));
+            setTodayReports(prev => ({ ...prev, [selectedTask]: { hours_worked: hoursWorked, completion_percent: completionPercent, issues_faced: issuesFaced, status: taskStatus } }));
             setSelectedTask('');
             setHoursWorked('');
             setCompletionPercent(0);
@@ -117,7 +117,7 @@ const EmployeeDashboard = () => {
         },
     };
 
-    const activeTasks = tasks.filter(t => t.status !== 'Completed');
+    const activeTasks = tasks.filter(t => t.status !== 'completed' && t.status !== 'Completed');
     const selectedTaskData = tasks.find(t => t._id === selectedTask);
     const alreadySubmitted = selectedTask && todayReports[selectedTask];
 
@@ -135,8 +135,8 @@ const EmployeeDashboard = () => {
                         {tasks.map(task => (
                             <div key={task._id} className="task-card card">
                                 <div className="task-card-header">
-                                    <h4>{task.name}</h4>
-                                    <span className={`badge badge-${task.priority === 'Critical' ? 'danger' : task.priority === 'High' ? 'warning' : task.priority === 'Medium' ? 'info' : 'success'}`}>
+                                    <h4>{task.title || task.name}</h4>
+                                    <span className={`badge badge-${task.priority === 'critical' || task.priority === 'Critical' ? 'danger' : task.priority === 'high' || task.priority === 'High' ? 'warning' : task.priority === 'medium' || task.priority === 'Medium' ? 'info' : 'success'}`}>
                                         {task.priority}
                                     </span>
                                 </div>
@@ -148,9 +148,9 @@ const EmployeeDashboard = () => {
                                     </span>
                                 </div>
                                 <div className="progress-bar" style={{ marginTop: '10px' }}>
-                                    <div className="progress-fill" style={{ width: `${task.completionPercent}%`, background: task.completionPercent === 100 ? 'var(--color-risk-low)' : 'var(--gradient-primary)' }} />
+                                    <div className="progress-fill" style={{ width: `${task.progress || 0}%`, background: (task.progress || 0) === 100 ? 'var(--color-risk-low)' : 'var(--gradient-primary)' }} />
                                 </div>
-                                <span className="progress-text">{task.completionPercent}% complete</span>
+                                <span className="progress-text">{task.progress || 0}% complete</span>
                             </div>
                         ))}
                     </div>
@@ -168,7 +168,7 @@ const EmployeeDashboard = () => {
                             const cd = getCountdown(task.deadline);
                             return (
                                 <div key={task._id} className="countdown-card card">
-                                    <h4>{task.name}</h4>
+                                    <h4>{task.title || task.name}</h4>
                                     <div className="countdown-time" style={{ color: cd.color }}>{cd.text}</div>
                                     <span className="countdown-label">remaining</span>
                                 </div>
@@ -191,7 +191,7 @@ const EmployeeDashboard = () => {
                             <select className="form-input" value={selectedTask} onChange={e => setSelectedTask(e.target.value)} required>
                                 <option value="">-- Choose a task --</option>
                                 {activeTasks.map(t => (
-                                    <option key={t._id} value={t._id}>{t.name} ({t.projectName})</option>
+                                    <option key={t._id} value={t._id}>{t.title || t.name} ({t.projectName})</option>
                                 ))}
                             </select>
                         </div>
@@ -200,8 +200,8 @@ const EmployeeDashboard = () => {
                             <div className="submitted-readonly">
                                 <p className="submitted-label">✅ Report already submitted for this task today</p>
                                 <div className="submitted-data">
-                                    <span>Hours: {todayReports[selectedTask].hoursWorked}h</span>
-                                    <span>Completion: {todayReports[selectedTask].completionPercent}%</span>
+                                    <span>Hours: {todayReports[selectedTask].hours_worked}h</span>
+                                    <span>Completion: {todayReports[selectedTask].completion_percent}%</span>
                                     <span>Status: {todayReports[selectedTask].status}</span>
                                 </div>
                             </div>
@@ -214,7 +214,7 @@ const EmployeeDashboard = () => {
                                     </div>
                                     <div className="form-group">
                                         <label className="form-label">Completion: {completionPercent}%</label>
-                                        <input type="range" className="slider" min={selectedTaskData?.completionPercent || 0} max="100" value={completionPercent} onChange={e => {
+                                        <input type="range" className="slider" min={selectedTaskData?.progress || 0} max="100" value={completionPercent} onChange={e => {
                                             setCompletionPercent(parseInt(e.target.value));
                                             if (parseInt(e.target.value) === 100) setTaskStatus('Completed');
                                         }} />

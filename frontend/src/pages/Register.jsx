@@ -38,7 +38,8 @@ const Register = () => {
             });
             navigate('/login?registered=true');
         } catch (err) {
-            setError(err.message || 'Registration failed. Please try again.');
+            const serverMsg = err.response?.data?.message || err.response?.data?.error;
+            setError(serverMsg || err.message || 'Registration failed. Please try again.');
         } finally {
             setLoading(false);
         }

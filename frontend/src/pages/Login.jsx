@@ -22,7 +22,12 @@ const Login = () => {
             const user = await login(email, password, role);
             navigate(user.role === 'manager' ? '/manager' : '/employee');
         } catch (err) {
-            setError('Invalid email or password');
+            if (!err.response) {
+                setError('Cannot connect to server. Please make sure the backend is running.');
+            } else {
+                const serverMsg = err.response?.data?.message || err.response?.data?.error;
+                setError(serverMsg || 'Invalid email or password');
+            }
         } finally {
             setLoading(false);
         }

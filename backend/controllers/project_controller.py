@@ -5,7 +5,7 @@ from models.project_model import ProjectModel
 from models.task_model import TaskModel
 from models.progress_model import ProgressModel
 from models.user_model import UserModel
-from datetime import date
+from datetime import date, timedelta
 import numpy as np
 
 
@@ -127,7 +127,7 @@ class ProjectController:
             return error_response("employee_id query param required", 400)
 
         reports = prm.get_history_by_employee(employee_id, days=7)
-        labels  = [(date.today() - __import__('datetime').timedelta(days=i)).strftime('%a') for i in range(6, -1, -1)]
+        labels  = [(date.today() - timedelta(days=i)).strftime('%a') for i in range(6, -1, -1)]
         data    = [int(r.get('completion_percent', 0)) for r in reports[-7:]]
         # Pad if fewer than 7 days
         while len(data) < 7:

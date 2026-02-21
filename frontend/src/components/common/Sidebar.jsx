@@ -13,6 +13,13 @@ import {
     HiOutlinePencilAlt,
     HiOutlineChevronLeft,
     HiOutlineChevronRight,
+    HiOutlineViewBoards,
+    HiOutlineLightBulb,
+    HiOutlineChartBar,
+    HiOutlineChatAlt2,
+    HiOutlineCalendar,
+    HiOutlineLink,
+    HiOutlineCog,
 } from 'react-icons/hi';
 import './Sidebar.css';
 
@@ -25,18 +32,30 @@ const Sidebar = ({ collapsed, onToggle }) => {
         { path: '/projects', label: 'Projects', icon: <HiOutlineFolder /> },
         { path: '/create-project', label: 'Create Project', icon: <HiOutlinePlusCircle /> },
         { path: '/task-assignment', label: 'Task Assignment', icon: <HiOutlineClipboardList /> },
+        { path: '/kanban', label: 'Kanban Board', icon: <HiOutlineViewBoards /> },
         { path: '/risk-prediction', label: 'Risk Prediction', icon: <HiOutlineShieldCheck /> },
-        { path: '/employee-performance', label: 'Employee Performance', icon: <HiOutlineUserGroup /> },
+        { path: '/ai-insights', label: 'AI Insights', icon: <HiOutlineLightBulb /> },
+        { path: '/employee-performance', label: 'Team Performance', icon: <HiOutlineUserGroup /> },
+        { path: '/analytics', label: 'Analytics', icon: <HiOutlineChartBar /> },
         { path: '/reports', label: 'Reports', icon: <HiOutlineDocumentText /> },
-        { path: '/alerts', label: 'Alerts', icon: <HiOutlineBell /> },
+        { path: '/alert-center', label: 'Alert Center', icon: <HiOutlineBell /> },
+        { path: '/collaboration', label: 'Collaboration', icon: <HiOutlineChatAlt2 /> },
+        { path: '/smart-planning', label: 'Smart Planning', icon: <HiOutlineCalendar /> },
+        { path: '/jira-integration', label: 'Jira Integration', icon: <HiOutlineLink /> },
+        { path: '/settings', label: 'Settings', icon: <HiOutlineCog /> },
     ];
 
     const employeeLinks = [
         { path: '/employee', label: 'Dashboard', icon: <HiOutlineHome /> },
         { path: '/daily-progress', label: 'Daily Progress', icon: <HiOutlinePencilAlt /> },
         { path: '/projects', label: 'Projects', icon: <HiOutlineFolder /> },
+        { path: '/kanban', label: 'Kanban Board', icon: <HiOutlineViewBoards /> },
+        { path: '/ai-insights', label: 'AI Insights', icon: <HiOutlineLightBulb /> },
+        { path: '/analytics', label: 'Analytics', icon: <HiOutlineChartBar /> },
         { path: '/reports', label: 'Reports', icon: <HiOutlineDocumentText /> },
-        { path: '/alerts', label: 'Alerts', icon: <HiOutlineBell /> },
+        { path: '/alert-center', label: 'Alert Center', icon: <HiOutlineBell /> },
+        { path: '/collaboration', label: 'Collaboration', icon: <HiOutlineChatAlt2 /> },
+        { path: '/settings', label: 'Settings', icon: <HiOutlineCog /> },
     ];
 
     const navItems = isManager ? managerLinks : employeeLinks;

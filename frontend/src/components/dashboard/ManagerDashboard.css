@@ -254,7 +254,7 @@
 }
 
 .btn-secondary:hover {
-    background: rgba(99, 102, 241, 0.15);
+    background: rgba(var(--color-primary-rgb), 0.15);
     border-color: #6366f1;
 }
 

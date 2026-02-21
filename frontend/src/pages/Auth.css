@@ -140,7 +140,7 @@
 }
 
 .cred-pill:hover {
-    background: rgba(99, 102, 241, 0.15);
+    background: rgba(var(--color-primary-rgb), 0.15);
     border-color: #6366f1;
 }
 
@@ -252,7 +252,7 @@
 }
 
 .radio-pill.active {
-    background: rgba(99, 102, 241, 0.15);
+    background: rgba(var(--color-primary-rgb), 0.15);
     border-color: #6366f1;
     color: #6366f1;
 }
@@ -352,12 +352,12 @@
 }
 
 .task-select-card:hover {
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
 }
 
 .task-select-card.selected {
     border-color: #6366f1;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.1);
 }
 
 .task-select-card.submitted {

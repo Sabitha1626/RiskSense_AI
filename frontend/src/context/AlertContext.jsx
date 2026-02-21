@@ -22,6 +22,8 @@ export const AlertProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) return;            // skip when not logged-in
         fetchAlerts();
         // Poll for new alerts every 30 seconds
         const interval = setInterval(fetchAlerts, 30000);

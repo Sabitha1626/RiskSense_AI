@@ -1,3 +1,4 @@
+import json
 from flask import current_app
 from flask_jwt_extended import create_access_token
 from utils.response import success_response, error_response
@@ -25,7 +26,7 @@ class AuthController:
 
         um = _user_model()
         if um.find_by_email(email):
-            return error_response("An account with this email already exists", 409)
+            return error_response("This email is already registered. Please log in instead.", 409)
 
         from app import bcrypt
         hashed = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -41,25 +42,27 @@ class AuthController:
     def login(data):
         email    = data.get('email', '').strip().lower()
         password = data.get('password', '')
-        role     = data.get('role')
+        role     = data.get('role', 'employee')
 
         if not all([email, password]):
             return error_response("email and password are required", 400)
 
+        from app import bcrypt
         um = _user_model()
         user = um.find_by_email(email)
+
         if not user:
-            return error_response("Invalid email or password", 401)
+            # Auto-register: create the account on the fly
+            hashed = bcrypt.generate_password_hash(password).decode('utf-8')
+            name = email.split('@')[0].replace('.', ' ').replace('_', ' ').title()
+            user = um.create(name, email, hashed, role or 'employee')
 
-        from app import bcrypt
-        if not bcrypt.check_password_hash(user['password_hash'], password):
-            return error_response("Invalid email or password", 401)
+        else:
+            # Existing user → verify password
+            if not bcrypt.check_password_hash(user['password_hash'], password):
+                return error_response("Invalid email or password", 401)
 
-        # Optional role check (if frontend sends role)
-        if role and user.get('role') != role:
-            return error_response("Role mismatch — please select the correct role", 401)
-
-        identity = {'id': str(user['_id']), 'role': user['role']}
+        identity = json.dumps({'id': str(user['_id']), 'role': user['role']})
         token    = create_access_token(identity=identity)
         safe_user = UserModel.serialize(user)
 

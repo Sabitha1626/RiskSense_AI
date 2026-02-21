@@ -16,17 +16,29 @@ class ProgressModel:
             'date': today_str,
             'hours_worked': float(data.get('hours_worked', 0)),
             'completion_percent': float(data.get('completion_percent', 0)),
+            'issues_faced': data.get('issues_faced', ''),
+            'status': data.get('status', 'In Progress'),
+            'blocker_desc': data.get('blocker_desc', ''),
             'notes': data.get('notes', ''),
             'proof_file': data.get('proof_file'),
             'anomaly_flag': is_anomaly,
             'submitted_at': datetime.now(timezone.utc),
         }
         # Upsert: one report per (task, employee, date)
-        self.collection.update_one(
+        result = self.collection.update_one(
             {'task_id': data['task_id'], 'employee_id': employee_id, 'date': today_str},
             {'$set': doc},
             upsert=True
         )
+        if result.upserted_id:
+            doc['_id'] = result.upserted_id
+        else:
+            existing = self.collection.find_one(
+                {'task_id': data['task_id'], 'employee_id': employee_id, 'date': today_str},
+                {'_id': 1}
+            )
+            if existing:
+                doc['_id'] = existing['_id']
         return doc
 
     def get_today(self, task_id, employee_id):

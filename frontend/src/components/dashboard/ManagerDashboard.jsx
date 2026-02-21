@@ -81,11 +81,11 @@ const ManagerDashboard = () => {
         },
     };
 
-    const getPriorityColor = (priority) => {
-        switch (priority) {
-            case 'Critical': return 'var(--color-risk-critical)';
-            case 'High': return 'var(--color-risk-high)';
-            case 'Medium': return 'var(--color-risk-medium)';
+    const getSeverityColor = (severity) => {
+        switch (severity) {
+            case 'critical': return 'var(--color-risk-critical)';
+            case 'warning': return 'var(--color-risk-medium)';
+            case 'info': return 'var(--color-risk-low)';
             default: return 'var(--color-risk-low)';
         }
     };
@@ -194,26 +194,25 @@ const ManagerDashboard = () => {
                     <div className="alert-feed">
                         {data.alerts
                             .sort((a, b) => {
-                                const order = { Critical: 0, High: 1, Medium: 2, Low: 3 };
-                                return (order[a.priority] ?? 4) - (order[b.priority] ?? 4);
+                                const order = { critical: 0, warning: 1, info: 2, success: 3 };
+                                return (order[a.severity] ?? 4) - (order[b.severity] ?? 4);
                             })
                             .map(alert => (
                                 <div key={alert._id} className="alert-feed-card card">
                                     <div className="alert-feed-top">
                                         <div className="alert-feed-meta">
-                                            <span className="badge" style={{ background: getPriorityColor(alert.priority) + '20', color: getPriorityColor(alert.priority) }}>
-                                                {alert.type.replace('_', ' ')}
+                                            <span className="badge" style={{ background: getSeverityColor(alert.severity) + '20', color: getSeverityColor(alert.severity) }}>
+                                                {(alert.type || '').replace('_', ' ')}
                                             </span>
-                                            <span className="alert-feed-name">{alert.taskOrEmployee}</span>
-                                            <span className="badge" style={{ background: getPriorityColor(alert.priority) + '20', color: getPriorityColor(alert.priority) }}>
-                                                {alert.priority}
+                                            <span className="alert-feed-name">{alert.title}</span>
+                                            <span className="badge" style={{ background: getSeverityColor(alert.severity) + '20', color: getSeverityColor(alert.severity) }}>
+                                                {alert.severity}
                                             </span>
                                         </div>
                                         <span className="alert-feed-time">{new Date(alert.timestamp).toLocaleString()}</span>
                                     </div>
                                     <p className="alert-feed-message">{alert.message}</p>
                                     <div className="alert-feed-action">
-                                        <span className="alert-suggested">💡 {alert.suggestedAction}</span>
                                         <button className="btn btn-sm btn-ghost" onClick={() => handleDismiss(alert._id)}>
                                             <HiOutlineX /> Dismiss
                                         </button>

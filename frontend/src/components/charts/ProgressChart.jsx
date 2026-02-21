@@ -5,33 +5,39 @@ import projectService from '../../services/projectService';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const ProgressChart = ({ projectId = 'p1' }) => {
+const ProgressChart = ({ projectId }) => {
     const [chartData, setChartData] = useState(null);
+    const [error, setError] = useState('');
 
     useEffect(() => {
+        if (!projectId) return;
         const fetchData = async () => {
-            const data = await projectService.getProgressHistory(projectId);
-            setChartData({
-                labels: data.labels,
-                datasets: [
-                    {
-                        label: 'Planned Progress %',
-                        data: data.planned,
-                        backgroundColor: 'rgba(99, 102, 241, 0.7)',
-                        borderColor: 'rgba(99, 102, 241, 1)',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                    },
-                    {
-                        label: 'Actual Progress %',
-                        data: data.actual,
-                        backgroundColor: 'rgba(6, 182, 212, 0.7)',
-                        borderColor: 'rgba(6, 182, 212, 1)',
-                        borderWidth: 1,
-                        borderRadius: 4,
-                    },
-                ],
-            });
+            try {
+                const data = await projectService.getProgressHistory(projectId);
+                setChartData({
+                    labels: data.labels,
+                    datasets: [
+                        {
+                            label: 'Planned Progress %',
+                            data: data.planned,
+                            backgroundColor: 'rgba(99, 102, 241, 0.7)',
+                            borderColor: 'rgba(99, 102, 241, 1)',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                        },
+                        {
+                            label: 'Actual Progress %',
+                            data: data.actual,
+                            backgroundColor: 'rgba(6, 182, 212, 0.7)',
+                            borderColor: 'rgba(6, 182, 212, 1)',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                        },
+                    ],
+                });
+            } catch (err) {
+                setError('Failed to load progress data');
+            }
         };
         fetchData();
     }, [projectId]);
@@ -67,6 +73,8 @@ const ProgressChart = ({ projectId = 'p1' }) => {
         },
     };
 
+    if (!projectId) return <div style={{ height: 250, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)' }}>Select a project to view progress</div>;
+    if (error) return <div style={{ height: 250, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-risk-high)' }}>{error}</div>;
     if (!chartData) return <div className="animate-pulse" style={{ height: 250 }} />;
 
     return <Bar data={chartData} options={options} />;
